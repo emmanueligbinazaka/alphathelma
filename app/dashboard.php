@@ -48,8 +48,6 @@ $totalContacts = ($resultContacts) ? $resultContacts->fetch_assoc()['total'] : 0
 
 <body>
 
-
-
   <!--start wrapper-->
   <div class="wrapper">
     <!--start top header-->
