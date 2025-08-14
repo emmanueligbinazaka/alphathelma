@@ -136,7 +136,7 @@
 <?php
 $page = 'Services';
 
-include('connection.php')
+include('connection.php');
  ?>
 
 <!DOCTYPE html>
@@ -172,7 +172,7 @@ $token = $_GET['token'];
     $row = mysqli_fetch_array($result);
   ?>
 
-  <div class="container">
+  <div class="container h">
     <div class="row">
     <div class="col-md-7 descrip">
         <img src="app/<?= $row['cat_img'] ?>" class="img-fluid image" />
