@@ -28,70 +28,27 @@ include('connection.php');
   <div class="banner">
     <h1>Latest Industry News</h1>
   </div>
-
-  <?php 
-    $query = "SELECT title FROM blog_categories";
-    $result = mysqli_query($conn,$query);
-  ?>
-
   <div class="top">
     <div class="container">
       <div class="row">
+      <?php 
+        $query = "SELECT * FROM `blog_categories` ORDER by id DESC";
+        $result = mysqli_query($conn,$query);
+        $num = mysqli_num_rows($result);
+
+        for ($i = 0; $i < $num; $i++) {
+        $row = mysqli_fetch_array($result);
+      ?>
         <div class="col-md-4 mt-5">
-          <img src="images/14530.png" class="img-fluid" />
+          <img src="app/<?= $row['cat_img']; ?>" class="img-fluid" />
           <div class="set">
-            <a href="#">
-            <h6>How to Build a Strong Brand Identity from Scratch</h6>
+            <a href="descrip.php?token=<?= $row['token']; ?>">
+            <h6><?= $row['title']; ?></h6>
               <div class="arrow-right"></div>
             </a>
           </div>
         </div>
-        <div class="col-md-4 mt-5">
-          <img src="images/14530.png" class="img-fluid" />
-          <div class="set">
-          <a href="#">
-            <h6>How to Build a Strong Brand Identity from Scratch</h6>
-              <div class="arrow-right"></div>
-          </a>
-          </div>
-        </div>
-        <div class="col-md-4 mt-5">
-          <img src="images/14530.png" class="img-fluid" />
-          <div class="set">
-            <a href="#">
-            <h6>How to Build a Strong Brand Identity from Scratch</h6>
-              <div class="arrow-right"></div>
-            </a>
-          </div>
-        </div>
-        <div></div>
-        <div class="col-md-4 mt-5">
-          <img src="images/14530.png" class="img-fluid" />
-          <div class="set">
-            <a href="#">
-            <h6>How to Build a Strong Brand Identity from Scratch</h6>
-              <div class="arrow-right"></div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4 mt-5">
-          <img src="images/14530.png" class="img-fluid" />
-          <div class="set">
-            <a href="#">
-            <h6>How to Build a Strong Brand Identity from Scratch</h6>
-              <div class="arrow-right"></div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4 mt-5">
-          <img src="images/14530.png" class="img-fluid" />
-          <div class="set">
-            <a href="#">
-            <h6>How to Build a Strong Brand Identity from Scratch</h6>
-              <div class="arrow-right"></div>
-            </a>
-          </div>
-        </div>
+        <?php } ?>
       </div>
     </div>
   </div>

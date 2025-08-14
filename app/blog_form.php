@@ -111,7 +111,7 @@ require_once('includes/fns.php');
               <option disabled selected value="">Select Category</option>
               <option value="Branding" <?php echo ($category ?? '') === 'branding' ? 'selected' : ''; ?>>Branding</option>
               <option value="Marketing" <?php echo ($category ?? '') === 'marketing' ? 'selected' : ''; ?>>Marketing</option>
-              <option value="Coding" <?php echo ($category ?? '') === 'coding' ? 'selected' : ''; ?>>Coding</option>
+              <option value="Digital Marketing  " <?php echo ($category ?? '') === 'digital_marketing' ? 'selected' : ''; ?>>Digital Marketing</option>
             </select>
           </div>
 

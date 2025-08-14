@@ -3,7 +3,6 @@ session_start();
 include('includes/connect.php');
 require_once('includes/fns.php');
 
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -130,7 +129,7 @@ require_once('includes/fns.php');
                     $row = mysqli_fetch_array($result);
                     ?>
                     <tr>
-                      <td><input type="checkbox" name="check_id[]" value="<?php echo $row['id']; ?>" id="del<?= $i ?>">
+                      <td><input type="checkbox" name="check_token[]" value="<?php echo $row['token']; ?>" id="del<?= $i ?>">
                       </td>
                       <td><?php echo substr($row['title'], 0, 25); ?>...</td>
                       <td><?php echo $row['author']; ?></td>
@@ -144,10 +143,10 @@ require_once('includes/fns.php');
 
                       <td>
                         <div class="table-actions d-flex align-items-center gap-3 fs-4">
-                          <a href="edit-blogs?id=<?php echo $row['id']; ?>" class="text-warning"
+                          <a href="edit-blogs?token=<?php echo $row['token']; ?>" class="text-warning"
                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i
                               class="bi bi-pencil-fill"></i></a>
-                              <a href="delete.php?id=<?php echo ($row['id']); ?>"
+                              <a href="delete.php?token=<?php echo ($row['token']); ?>"
                             onclick="return confirm('Are you sure you want to delete this location?')" class="text-danger"
                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i
                               class="bi bi-trash-fill"></i></a>

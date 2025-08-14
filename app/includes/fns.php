@@ -145,6 +145,69 @@ function organisation()
 function send_email($to, $name, $fromName, $subject, $message, $file = 'nofile')
 {
 
+
+/**
+ * Resize an image and save it to a new file
+ *
+ * @param string $source_path  Path to original image
+ * @param string $dest_path    Path to save resized image
+ * @param int    $new_width    Desired width
+ * @param int    $new_height   Desired height
+ * @return bool                True on success, false on failure
+ */
+function resizeImage($source_path, $dest_path, $new_width, $new_height) {
+    // Get original image size + type
+    list($width, $height, $type) = getimagesize($source_path);
+
+    // Create source image from file
+    switch ($type) {
+        case IMAGETYPE_JPEG:
+            $src = imagecreatefromjpeg($source_path);
+            break;
+        case IMAGETYPE_PNG:
+            $src = imagecreatefrompng($source_path);
+            break;
+        case IMAGETYPE_GIF:
+            $src = imagecreatefromgif($source_path);
+            break;
+        default:
+            return false; // unsupported file type
+    }
+
+    // Create new empty image with desired size
+    $dst = imagecreatetruecolor($new_width, $new_height);
+
+    // Preserve transparency for PNG/GIF
+    if ($type == IMAGETYPE_PNG || $type == IMAGETYPE_GIF) {
+        imagecolortransparent($dst, imagecolorallocatealpha($dst, 0, 0, 0, 127));
+        imagealphablending($dst, false);
+        imagesavealpha($dst, true);
+    }
+
+    // Resize
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, 
+        $new_width, $new_height, $width, $height);
+
+    // Save to destination
+    switch ($type) {
+        case IMAGETYPE_JPEG:
+            imagejpeg($dst, $dest_path, 90);
+            break;
+        case IMAGETYPE_PNG:
+            imagepng($dst, $dest_path, 8);
+            break;
+        case IMAGETYPE_GIF:
+            imagegif($dst, $dest_path);
+            break;
+    }
+
+    // Free memory
+    imagedestroy($src);
+    imagedestroy($dst);
+
+    return true;
+}
+
   // Mail Template
   $mailcontent  = '<html>
 <head>

@@ -3,11 +3,11 @@ session_start();
 include('includes/connect.php');
 require_once('includes/fns.php');
 
-if ($_GET['id']) {
-  $id = $_GET['id'];
+if ($_GET['token']) {
+  $token = $_GET['token'];
 }
 
-$query = "select * from blog_categories where id = '$id'";
+$query = "select * from blog_categories where token = '$token'";
 
 $result = mysqli_query($conn, $query);
 $num = mysqli_num_rows($result);
@@ -102,7 +102,7 @@ $row = mysqli_fetch_array($result);
 
       <div class="card">
         <div class="card-body">
-          <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+        <input type="hidden" name="token" value="<?php echo $row['token']; ?>">
 
           <div class="input-group mb-3">
             <span class="input-group-text">Title</span>
@@ -122,7 +122,7 @@ $row = mysqli_fetch_array($result);
               <option disabled>Select category</option>
               <option value="Branding" <?php if ($row['category'] == 'branding') echo 'selected'; ?>>Branding</option>
               <option value="Marketing" <?php if ($row['category'] == 'marketing') echo 'selected'; ?>>Marketing</option>
-              <option value="Coding" <?php if ($row['category'] == 'coding') echo 'selected'; ?>>Coding</option>
+              <option value="Digital Marketing" <?php if ($row['category'] == 'digital_marketing') echo 'selected'; ?>>Digital Marketing</option>
             </select>
           </div>
 

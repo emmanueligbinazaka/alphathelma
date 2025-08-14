@@ -1,5 +1,7 @@
 <?php
 $page = 'Home';
+
+include('connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -276,28 +278,34 @@ $page = 'Home';
         </p>
 
       </div>
+
       <div class="col-md-8 hero-6-complex">
-        <div class="col-md-6">
-          <img src="images/14530.png" class="img-fluid w-100" />
-          <div class="set">
-            <a href="#">
-            <h6>OpenAI to Unveil It's Most Advanced AI Language Model</h6>
-              <div class="arrow-right"></div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <img src="images/14530.png" class="img-fluid w-100" />
-          <div class="set">
-            <a href="#">
-            <h6>Voice and Visual Search Optimization</h6>
-              <div class="arrow-right"></div>
-            </a>
-          </div>
+        <div class="row">
+        <?php 
+        $query = "SELECT * FROM blog_categories ORDER BY id DESC LIMIT 2";
+        $result = mysqli_query($conn, $query);
+        $num = mysqli_num_rows($result);
+
+        for ($row = $i = 0; $i < $num; $i++) {
+          $row = mysqli_fetch_array($result);
+      ?>
+      <div class="col-md-6">
+        <img src="app/<?= htmlspecialchars($row['cat_img']) ?>" class="img-fluid w-100" alt="<?= htmlspecialchars($row['title']) ?>" />
+        <div class="set">
+          <a href="#">
+            <h6><?= htmlspecialchars($row['title']); ?></h6>
+            <div class="arrow-right"></div>
+          </a>
         </div>
       </div>
+    <?php 
+      } 
+    ?> 
+        </div>
+      </div>
+
     </div>
-  </div>
+  </div> 
 
   <?php include('footer.php'); ?>
 </body>
